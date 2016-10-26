@@ -28,11 +28,9 @@ alias cic='set completion-ignore-case On'   # cic:          Make tab-completion 
 alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS DesktoA
 alias mvnci="mvn clean install -DskipTests=true"
 alias ll="ls -larth"
-
-alias emacs="emacs-24.5 -nw"
-
-alias mongostop="mongostop_func"
-alias mysqlstart="sudo /usr/local/mysql/bin/mysqld_safe &"
-alias mysqlstop="sudo /usr/local/mysql/bin/mysqladmin shutdown"
-
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
+
+# ---------
+# Emacs
+# ---------
+alias emacs="emacs-24.5 -nw"
