@@ -30,7 +30,7 @@
   lol = log --graph --decorate --pretty=online --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
   pl = pull --rebase
-
+  cl = clean --force
 [filter "media"]
   required = true
   clean = git media clean %f
