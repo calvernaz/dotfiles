@@ -19,3 +19,10 @@ ql () { qlmanage -p "$*" >& /dev/null; }    # ql:           Opens any file in Ma
 # Docker specific
 #
 d-c() { docker-compose $@; }
+
+#
+# SHA-1 Base64
+#
+sha1base64() {
+    echo -n $1 | openssl sha1 -binary | base64
+}

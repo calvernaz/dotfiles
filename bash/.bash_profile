@@ -1,6 +1,8 @@
 # ~/.bash_profile
 
 [[ -s ~/.bashrc ]] && source ~/.bashrc
+[[ -s ~/.bash-aliases ]] && source ~/.bash-aliases
+[[ -s ~/.bash-functions ]] && source ~/.bash-functions
 
 function prompt {
 	local BLACK="\[\033[0;30m\]"
