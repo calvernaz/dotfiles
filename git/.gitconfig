@@ -27,7 +27,7 @@
   default = current
 
 [alias]
-  lol = log --graph --decorate --pretty=online --abbrev-commit
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
   pl = pull --rebase
   cl = clean --force
