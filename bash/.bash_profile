@@ -1,28 +1,17 @@
+#!/usr/bin/env sh
 # ~/.bash_profile
 
-[[ -s ~/.bashrc ]] && source ~/.bashrc
-[[ -s ~/.bash_aliases ]] && source ~/.bash_aliases
-[[ -s ~/.bash_functions ]] && source ~/.bash_functions
+[[ -s ~/.bashrc ]] && . .bashrc
+[[ -s ~/.bash_aliases ]] && . .bash_aliases
+[[ -s ~/.bash_functions ]] && . .bash_functions
 
-function prompt {
-	local BLACK="\[\033[0;30m\]"
-	local BLACKBOLD="\[\033[1;30m\]"
-	local RED="\[\033[0;31m\]"
-	local REDBOLD="\[\033[1;31m\]"
-	local GREEN="\[\033[0;32m\]"
-	local GREENBOLD="\[\033[1;32m\]"
-	local YELLOW="\[\033[0;33m\]"
-	local YELLOWBOLD="\[\033[1;33m\]"
-	local BLUE="\[\033[0;34m\]"
-	local BLUEBOLD="\[\033[1;34m\]"
-	local PURPLE="\[\033[0;35m\]"
-	local PURPLEBOLD="\[\033[1;35m\]"
-	local CYAN="\[\033[0;36m\]"
-	local CYANBOLD="\[\033[1;36m\]"
-	local WHITE="\[\033[0;37m\]"
-	local WHITEBOLD="\[\033[1;37m\]"
-	local RESETCOLOR="\[\e[00m\]"
-
+prompt() {
+	RED="\[\033[0;31m\]"
+	GREEN="\[\033[0;32m\]"
+	GREENBOLD="\[\033[1;32m\]"
+	BLUE="\[\033[0;34m\]"
+	PURPLE="\[\033[0;35m\]"
+	RESETCOLOR="\[\e[00m\]"
 	export PS1="\n$RED\u $PURPLE@ $GREEN\w $RESETCOLOR$GREENBOLD\$(git rev-parse --abbrev-ref HEAD 2> /dev/null)\n $BLUE[\#] → $RESETCOLOR"
 	export PS2=" | → $RESETCOLOR"
 }
@@ -36,7 +25,7 @@ export PATH="/usr/local/git/bin:/sw/bin/:/usr/local/bin:/usr/local/:/usr/local/s
 
 #   Set Default Editor (change 'Nano' to the editor of your choice)
 #   ------------------------------------------------------------
-export EDITOR=/usr/bin/nano
+export EDITOR=/usr/bin/emacs
 
 #   Set default blocksize for ls, df, du
 #   from this: http://hints.macworld.com/comment.php?mode=view&cid=24491
@@ -51,52 +40,33 @@ export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
 zipf () { zip -r "$1".zip "$1" ; }          # zipf:         To create a ZIP archive of a folder
-alias numFiles='echo $(ls -1 | wc -l)'      # numFiles:     Count of non-hidden files in current dir
+alias numFiles='gettext $(ls -1 | wc -l)'      # numFiles:     Count of non-hidden files in current dir
 alias make1mb='mkfile 1m ./1MB.dat'         # make1mb:      Creates a file of 1mb size (all zeros)
 alias make5mb='mkfile 5m ./5MB.dat'         # make5mb:      Creates a file of 5mb size (all zeros)
 alias make10mb='mkfile 10m ./10MB.dat'      # make10mb:     Creates a file of 10mb size (all zeros)
 
-#   cdf:  'Cd's to frontmost window of MacOS Finder
-#   ------------------------------------------------------
-cdf () {
-	        currFolderPath=$( /usr/bin/osascript <<EOF
-EOT
-            tell application "Finder"
-                try
-            set currFolder to (folder of the front window as alias)
-                on error
-            set currFolder to (path to desktop folder as alias)
-                end try
-                POSIX path of currFolder
-            end tell
-EOT
-        )
-        echo "cd to \"$currFolderPath\""
-        cd "$currFolderPath"
-    }
-
 #   extract:  Extract most know archives with one command
 #   ---------------------------------------------------------
-    extract () {
-        if [ -f $1 ] ; then
-          case $1 in
-            *.tar.bz2)   tar xjf $1     ;;
-            *.tar.gz)    tar xzf $1     ;;
-            *.bz2)       bunzip2 $1     ;;
-            *.rar)       unrar e $1     ;;
-            *.gz)        gunzip $1      ;;
-            *.tar)       tar xf $1      ;;
-            *.tbz2)      tar xjf $1     ;;
-            *.tgz)       tar xzf $1     ;;
-            *.zip)       unzip $1       ;;
-            *.Z)         uncompress $1  ;;
-            *.7z)        7z x $1        ;;
-            *)     echo "'$1' cannot be extracted via extract()" ;;
-             esac
-         else
-             echo "'$1' is not a valid file"
-         fi
-    }
+extract () {
+    if [ -f "$1" ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf "$1"     ;;
+            *.tar.gz)    tar xzf "$1"     ;;
+            *.bz2)       bunzip2 "$1"     ;;
+            *.rar)       unrar e "$1"     ;;
+            *.gz)        gunzip "$1"      ;;
+            *.tar)       tar xf "$1"      ;;
+            *.tbz2)      tar xjf "$1"     ;;
+            *.tgz)       tar xzf "$1"     ;;
+            *.zip)       unzip "$1"       ;;
+            *.Z)         uncompress "$1"  ;;
+            *.7z)        7z x "$1"        ;;
+            *)     gettext "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        gettext "'$1' is not a valid file"
+    fi
+}
 
 
 #   ---------------------------
@@ -105,13 +75,13 @@ EOT
 
 alias qfind="find . -name "                 # qfind:    Quickly search for file
 ff () { /usr/bin/find . -name "$@" ; }      # ff:       Find file under the current directory
-ffs () { /usr/bin/find . -name "$@"'*' ; }  # ffs:      Find file whose name starts with a given string
-ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name ends with a given string
+ffs () { /usr/bin/find . -name "$*"'*' ; }  # ffs:      Find file whose name starts with a given string
+ffe () { /usr/bin/find . -name '*'"$*" ; }  # ffe:      Find file whose name ends with a given string
 
 #   spotlight: Search for a file using MacOS Spotlight's metadata
 #   -----------------------------------------------------------
-    spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }
-
+spotlight () { mdfind "kMDItemDisplayName == $*wc"; }
+    
 
 #   ---------------------------
 #   5.  PROCESS MANAGEMENT
@@ -124,31 +94,31 @@ ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name end
 		#       E.g. findPid '/d$/' finds pids of all processes with names ending in 'd'
 #       Without the 'sudo' it will only find processes of the current user
 #   -----------------------------------------------------
-    findPid () { lsof -t -c "$@" ; }
+findPid () { lsof -t -c "$@" ; }
 
 #   memHogsTop, memHogsPs:  Find memory hogs
 #   -----------------------------------------------------
-    alias memHogsTop='top -l 1 -o rsize | head -20'
-    alias memHogsPs='ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
+alias memHogsTop='top -l 1 -o rsize | head -20'
+alias memHogsPs='ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
 
 #   cpuHogs:  Find CPU hogs
 #   -----------------------------------------------------
-    alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'
+alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'
 
 #   topForever:  Continual 'top' listing (every 10 seconds)
 #   -----------------------------------------------------
-    alias topForever='top -l 9999999 -s 10 -o cpu'
+alias topForever='top -l 9999999 -s 10 -o cpu'
 
 #   ttop:  Recommended 'top' invocation to minimize resources
 #   ------------------------------------------------------------
 #       Taken from this macosxhints article
 #       http://www.macosxhints.com/article.php?story=20060816123853639
 #   ------------------------------------------------------------
-    alias ttop="top -R -F -s 10 -o rsize"
+alias ttop="top -R -F -s 10 -o rsize"
 
 #   my_ps: List processes owned by my user:
 #   ------------------------------------------------------------
-    my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
+my_ps() { ps "$@" -u "$USER" -o pid,%cpu,%mem,start,time,bsdtime,command ; }
 
 
 #   ---------------------------
@@ -168,17 +138,17 @@ alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rul
 
 #   ii:  display useful host related informaton
 #   -------------------------------------------------------------------
-    ii() {
-        echo -e "\nYou are logged on ${RED}$HOST"
-        echo -e "\nAdditionnal information:$NC " ; uname -a
-        echo -e "\n${RED}Users logged on:$NC " ; w -h
-        echo -e "\n${RED}Current date :$NC " ; date
-        echo -e "\n${RED}Machine stats :$NC " ; uptime
-        echo -e "\n${RED}Current network location :$NC " ; scselect
-        echo -e "\n${RED}Public facing IP Address :$NC " ;myip
-        #echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
-        echo
-    }
+ii() {
+    gettext -e "\nYou are logged on ${RED}$HOST"
+    gettext -e "\nAdditionnal information:$NC " ; uname -a
+    gettext -e "\n${RED}Users logged on:$NC " ; w -h
+    gettext -e "\n${RED}Current date :$NC " ; date
+    gettext -e "\n${RED}Machine stats :$NC " ; uptime
+    gettext -e "\n${RED}Current network location :$NC " ; scselect
+    gettext -e "\n${RED}Public facing IP Address :$NC " ;myip
+        #gettext -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
+    gettext
+}
 
 
 #   ---------------------------------------
@@ -189,21 +159,21 @@ alias mountReadWrite='/sbin/mount -uw /'    # mountReadWrite:   For use when boo
 
 #   cleanupDS:  Recursively delete .DS_Store files
 #   -------------------------------------------------------------------
-    alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"
+alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"
 
 #   finderShowHidden:   Show hidden files in Finder
 #   finderHideHidden:   Hide hidden files in Finder
 #   -------------------------------------------------------------------
-    alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'
-    alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'
+alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'
+alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'
 
 #   cleanupLS:  Clean up LaunchServices to remove duplicates in the "Open With" menu
 #   -----------------------------------------------------------------------------------
-    alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
 #    screensaverDesktop: Run a screensaver on the Desktop
 #   -----------------------------------------------------------------------------------
-    alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
+alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
 
 #   ---------------------------------------
 #   8.  WEB DEVELOPMENT
@@ -214,11 +184,11 @@ alias apacheRestart='sudo apachectl graceful'           # apacheRestart:    Rest
 alias editHosts='sudo edit /etc/hosts'                  # editHosts:        Edit /etc/hosts file
 alias herr='tail /var/log/httpd/error_log'              # herr:             Tails HTTP error logs
 alias apacheLogs="less +F /var/log/apache2/error_log"   # Apachelogs:   Shows apache error logs
-httpHeaders () { /usr/bin/curl -I -L $@ ; }             # httpHeaders:      Grabs headers from web page
+httpHeaders () { /usr/bin/curl -I -L "$@" ; }             # httpHeaders:      Grabs headers from web page
 
 #   httpDebug:  Download a web page and show info on what took time
 #   -------------------------------------------------------------------
-    httpDebug () { /usr/bin/curl $@ -o /dev/null -w "dns: %{time_namelookup} connect: %{time_connect} pretransfer: %{time_pretransfer} starttransfer: %{time_starttransfer} total: %{time_total}\n" ; }
+httpDebug () { /usr/bin/curl "$@" -o /dev/null -w "dns: %{time_namelookup} connect: %{time_connect} pretransfer: %{time_pretransfer} starttransfer: %{time_starttransfer} total: %{time_total}\n" ; }
 
 
 #   ---------------------------------------

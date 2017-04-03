@@ -1,2 +1,11 @@
 # dotfiles
-Dot files
+
+Bunch of dot files I've been collecting and updating for MacOSX.
+
+# Install
+
+To get this think working just link the `.bash_profile` to your home
+
+   ln -sf ~/dotfiles/bash/.bash_profile ~/.bash_profile
+   ln -sf ~/dotfiles/bash/.bash_functions ~/.bash_functions
+   ln -sf ~/dotfiles/bash/.bash_aliases ~/.bash_aliases

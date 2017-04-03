@@ -1,4 +1,5 @@
-# ~/.bash-aliases
+#!/usr/bin/env sh
+# ~/.bash_aliases
 
 #   -----------------------------
 #   2.  MAKE TERMINAL BETTER
@@ -33,7 +34,7 @@ alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\
 # ---------
 # Emacs
 # ---------
-alias emacs="emacs-24.5 -nw"
+alias emacs="emacs -nw"
 
 # ---------
 # Git
@@ -41,6 +42,6 @@ alias emacs="emacs-24.5 -nw"
 alias glol='git log --graph --pretty='\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit'
 
 # Docker
-alias dockercleancontainers="docker ps -a --no-trunc| grep 'Exit' | awk '{print \$1}' | xargs -L 1 -r docker rm"
-alias dockercleanimages="docker images -a --no-trunc | grep none | awk '{print \$3}' | xargs -L 1 -r docker rmi"
-alias dockerclean="dockercleancontainers && dockercleanimages"
+dockercleancontainers() { docker ps -a --no-trunc| grep 'Exit' | awk '{print \$1}' | xargs -L 1 -r docker rm; }
+dockercleanimages() { docker images -a --no-trunc | grep none | awk '{print \$3}' | xargs -L 1 -r docker rmi; }
+dockerclean() { dockercleancontainers && dockercleanimages; }

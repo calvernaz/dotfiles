@@ -1,28 +1,12 @@
-#   mans:   Search manpage given in agument '1' for term given in argument '2' (case insensitive)
-#           displays paginated result with colored search terms and two lines surrounding each hit.             Example: mans mplayer codec
-#   --------------------------------------------------------------------
-mans () { man $1 | grep -iC2 --color=always $2 | less }
-#   showa: to remind yourself of an alias (given some part of it)
-#   ------------------------------------------------------------
-showa () { /usr/bin/grep --color=always -i -a1 $@ ~/Library/init/bash/aliases.bash | grep -v '^\s*$' | less -FSRXc ; }
+#!/usr/bin/env sh
+# ~/.bash_functions
 
-mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
+mans () { man "$1" | grep -iC2 --color=always "$2" | less -FSRXc; }
+showa () { /usr/bin/grep --color=always -i -a1 "$@" ~/Library/init/bash/aliases.bash | grep -v '^\s*$' | less -FSRXc ; }
+mcd () { mkdir -p "$1" && cd "$1" || exit; }        # mcd:          Makes new Dir and jumps inside
 zipf () { zip -r "$1".zip "$1" ; }          # zipf:         To create a ZIP archive of a folder
-
-#
-# MacOS specific
-#
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
-ql () { qlmanage -p "$*" >& /dev/null; }    # ql:           Opens any file in MacOS Quicklook Preview
-
-#
-# Docker specific
-#
-d-c() { docker-compose $@; }
-
-#
-# SHA-1 Base64
-#
-sha1base64() {
-    echo -n $1 | openssl sha1 -binary | base64
-}
+ql () { qlmanage -p "$*" 2>&1 /dev/null; }    # ql:           Opens any file in MacOS Quicklook Preview
+dcc() { docker-compose "$@"; }
+sha1base64() { echo "$1" | openssl sha1 -binary | base64; }
+scheck() { shellcheck -x -e SC1091 -e SC2039 --color=always -s sh "$1"; }
