@@ -1,8 +1,8 @@
 # ~/.bash_profile
 
 [[ -s ~/.bashrc ]] && source ~/.bashrc
-[[ -s ~/.bash-aliases ]] && source ~/.bash-aliases
-[[ -s ~/.bash-functions ]] && source ~/.bash-functions
+[[ -s ~/.bash_aliases ]] && source ~/.bash_aliases
+[[ -s ~/.bash_functions ]] && source ~/.bash_functions
 
 function prompt {
 	local BLACK="\[\033[0;30m\]"
@@ -49,11 +49,6 @@ export BLOCKSIZE=1k
 #   ------------------------------------------------------------
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
-
-source .bashrc
-source .bash-aliases
-source .bash-functions
-
 
 zipf () { zip -r "$1".zip "$1" ; }          # zipf:         To create a ZIP archive of a folder
 alias numFiles='echo $(ls -1 | wc -l)'      # numFiles:     Count of non-hidden files in current dir
