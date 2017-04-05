@@ -1,38 +1,31 @@
-;; My options
-;; (server-start)
-
-(require 'package)
-  (add-to-list 'package-archives
-               '("MELPA Stable" . "https://stable.melpa.org/packages/") t)
+;; .emacs
+(when (>= emacs-major-version 24)
+  (require 'package)
   (package-initialize)
-;;  (package-refresh-contents)
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+  (package-refresh-contents)
+)
 
+;; elixir
+(unless (package-installed-p 'elixir-mode)
+  (package-install 'elixir-mode))
 
-;; node/javascript mode
-(setq js-indent-level 2)
-(require 'flycheck)
-(package-install 'exec-path-from-shell)
-(exec-path-from-shell-initialize)
+;; go
+(unless (package-installed-p 'go-mode)
+  (package-install 'go-mode))
 
-;; List
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+;;(setq-default tab-always-indent 'complete)
+;;(smart-tabs-add-language-support elixir elixir-mode-hook
+;;      ((c-indent-line . c-basic-offset)
+;;       (c-indent-region . c-basic-offset)))
 
-;; Elixir
-(add-to-list 'load-path "~/.emacs.d/elixir")
-(require 'elixir-mode)
-
-(setq-default tab-always-indent 'complete)
-(smart-tabs-add-language-support elixir elixir-mode-hook
-      ((c-indent-line . c-basic-offset)
-       (c-indent-region . c-basic-offset)))
-
-(smart-tabs-insinuate 'elixir)
+;;(smart-tabs-insinuate 'elixir)
 
 ;;(add-to-list 'load-path "~/.emacs.d/elixir/alchemist.el/")
 ;;(require 'alchemist)
 
 ;; company-mode, completion framework
-(add-hook 'after-init-hook 'global-company-mode)
+;;(add-hook 'after-init-hook 'global-company-mode)
 
 (blink-cursor-mode nil)
 
@@ -129,63 +122,12 @@
 ;;            (c-set-offset 'arglist-cont '+)
             ))
 
-;; mips asm mode
-(defun mips-asm-mode ()
-  "asm mode with adjusted defaults for use MIPS asm."
-  (interactive)
-  (setq-default asm-comment-char ?\#)
-  (asm-mode))
-
-;; octave mode
-(setq-default auto-mode-alist
-              (cons '("\\.m$" . octave-mode) auto-mode-alist))
-(add-hook 'octave-mode-hook
-          (lambda ()
-            (setq-default octave-block-offset 8)))
-
-;; caml mode - Tuareg :)
-;(load "append-tuareg")
-
-;; Prolog files and Perl files have the same extension :(
-(autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
-(autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
-(autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
-(setq prolog-system 'swi)
-(setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
-                                ("\\.m$" . mercury-mode))
-                              auto-mode-alist))
-
-(setq browse-url-browser-function 'browse-url-firefox
-      browse-url-new-window-flag  t
-      browse-url-firefox-new-window-is-tab t)
-
-;; vhdl
-(setq-default vhdl-basic-offset 4)
-(setq-default vhdl-electric-mode nil)
 
 ;; ruby
 ;; (setq ri-ruby-script "~/.emacs.d/elisp/ri-emacs.rb")
 ;; (autoload 'ri "~/.emacs.d/elisp/ri-ruby.el" nil t)
 
-;; c sharp
-(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
-(setq auto-mode-alist
-      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
 
-;; vala
-(autoload 'vala-mode "vala-mode" "Major mode for editing Vala code." t)
-(setq auto-mode-alist
-      (append '(("\\.vala$" . vala-mode)) auto-mode-alist))
-
-(require 'js-comint)
-(setq inferior-js-program-command "/usr/bin/java org.mozilla.javascript.tools.shell.Main")
-(add-hook 'js2-mode-hook '(lambda ()
-                            (local-set-key "\C-x\C-e" 'js-send-last-sexp)
-                            (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
-                            (local-set-key "\C-cb" 'js-send-buffer)
-                            (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
-                            (local-set-key "\C-cl" 'js-load-file-and-go)
-                            ))
 
 
 ;; python mode
@@ -212,11 +154,10 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (add-hook 'sh-mode-hook
-					(lambda ()
-						 (setq tab-width 4
-									 sh-basic-offset 4
-									 indent-tabs-mode t)))
-
+	  (lambda ()
+	    (setq tab-width 4
+		  sh-basic-offset 4
+		  indent-tabs-mode t)))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -230,12 +171,12 @@
  '(ecb-options-version "2.32")
  '(package-selected-packages
    (quote
-    (exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
+    (dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
  '(select-enable-clipboard t)
  '(sh-basic-offset 8)
  '(sh-indentation 8)
  '(show-paren-mode t)
- '(user-mail-address "cesar.alvernaz@gmail.com"))
+ '(user-mail-address "calvernaz@ptc.com"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
