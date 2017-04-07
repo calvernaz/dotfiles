@@ -73,3 +73,13 @@ ii() {
         #gettext -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
     gettext
 }
+
+code () {
+    if [[ $# = 0 ]]
+    then
+        open -a "Visual Studio Code" -n
+    else
+        [[ $1 = /* ]] && F="$1" || F="$PWD/${1#./}"
+        open -a "Visual Studio Code" -n --args "$F"
+    fi
+}

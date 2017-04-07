@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
 # ~/.bash_profile
 
-[[ -s ~/.bashrc ]] && . .bashrc
-[[ -s ~/.bash_aliases ]] && . .bash_aliases
-[[ -s ~/.bash_functions ]] && . .bash_functions
-[[ -s ~/.git-prompt.sh ]] && . .git-prompt.sh
+[[ -s ~/.bashrc ]] && . ~/.bashrc
+[[ -s ~/.bash_aliases ]] && . ~/.bash_aliases
+[[ -s ~/.bash_functions ]] && . ~/.bash_functions
+[[ -s ~/.git-prompt.sh ]] && . ~/.git-prompt.sh
 
 prompt() {
 	RED="\[\033[0;31m\]"
@@ -39,4 +39,3 @@ export BLOCKSIZE=1k
 #   ------------------------------------------------------------
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
-export PATH="/usr/local/opt/gettext/bin:$PATH"

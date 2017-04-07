@@ -4,7 +4,12 @@
   (package-initialize)
   (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
   (package-refresh-contents)
-)
+	)
+
+;; smartabs - spaces and tabs mix
+(unless (package-installed-p 'smart-tabs-mode)
+	(package-install 'smart-tabs-mode))
+(smart-tabs-insinuate 'c 'javascript)
 
 ;; elixir
 (unless (package-installed-p 'elixir-mode)
@@ -14,24 +19,21 @@
 (unless (package-installed-p 'go-mode)
   (package-install 'go-mode))
 
-;;(setq-default tab-always-indent 'complete)
-;;(smart-tabs-add-language-support elixir elixir-mode-hook
-;;      ((c-indent-line . c-basic-offset)
-;;       (c-indent-region . c-basic-offset)))
+;; python
+(unless (package-installed-p 'python-mode)
+  (package-install 'python-mode))
 
-;;(smart-tabs-insinuate 'elixir)
+;; javascript
+(unless (package-installed-p 'js2-mode)
+  (package-install 'js2-mode))
 
-;;(add-to-list 'load-path "~/.emacs.d/elixir/alchemist.el/")
-;;(require 'alchemist)
-
-;; company-mode, completion framework
-;;(add-hook 'after-init-hook 'global-company-mode)
+;; json-mode
+(unless (package-installed-p 'json-mode)
+  (package-install 'json-mode))
 
 (blink-cursor-mode nil)
-
 (global-set-key "\M-h"     'delete-trailing-whitespace)
 (global-set-key "\M-g"     'goto-line)
-;;(global-set-key "\C-w"     'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
 (global-set-key "\C-x\C-b" 'ibuffer)
@@ -41,14 +43,13 @@
 (global-set-key "\C-hs"    'info-lookup-symbol)
 (global-set-key [mouse-1]  'mouse-select-window)
 (global-set-key "\C-ci"    'imenu)
+(global-set-key "\C-@"   'set-mark-command)
 (global-unset-key [down-mouse-1])
 (setq-default dired-listing-switches "-la")
 (setq-default woman-topic-at-point nil)
 (setq-default x-stretch-cursor 1)
 (setq-default show-trailing-whitespace t)
 (setq-default default-indicate-empty-lines t)
-;;(setq-default indent-tabs-mode t)
-(setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 (setq indent-line-function 'insert-tab)
 (setq-default fill-column 78)
@@ -59,12 +60,11 @@
 (setq-default inhibit-startup-message 1)
 (setq-default scroll-step 1)
 (setq-default scroll-conservatively 1)
-(setq-default make-backup-files nil)
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
 (setq-default mouse-wheel-follow-mouse 1)
 (setq-default sgml-set-face 1)
 (setq-default save-abbrevs nil)
-;;(setq-default auto-save-interval 512)   ; autosave every 512 keyboard inputs
-;;(setq-default auto-save-timeout 30)     ; autosave after 30 s idle
+(setq-default auto-save-timeout 30)     ; autosave after 30 s idle
 (setq-default default-major-mode 'text-mode)
 (setq-default adaptive-fill-mode 1)
 (setq-default mouse-yank-at-point t)
@@ -74,9 +74,7 @@
 (setq-default hs-isearch-open t)
 
 (windmove-default-keybindings)
-;;/(global-set-key "\t" 'company-complete-common)
-
-(global-set-key [select]  'windmove-up)        ; workaround
+(global-set-key [select]  'windmove-up)
 (setq-default windmove-wrap-around t)
 
 (transient-mark-mode 1)
@@ -85,9 +83,8 @@
 (show-paren-mode 1)
 (auto-compression-mode 1)
 (mouse-avoidance-mode 'exile)
-;;(mouse-wheel-mode t)
+
 (menu-bar-mode -1)
-;;(resize-minibuffer-mode 1) ; stopped working with emacs-snapshot 20061111
 (require 'font-lock)
 (global-font-lock-mode 1)
 (setq font-lock-mode-maximum-decoration t)
@@ -105,46 +102,6 @@
   (interactive
    (if mark-active (list (region-beginning) (region-end))
      (list (save-excursion (backward-word 1) (point)) (point)))))
-
-;; CC-mode
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (c-toggle-hungry-state 1)
-            (define-key c-mode-base-map [?\C-`] 'next-error)
-            (define-key c-mode-base-map "\C-m" 'c-context-line-break)
-            (define-key c-mode-base-map "\C-cu" 'uncomment-region)
-            (auto-fill-mode)
-            (hs-minor-mode)
-            (reveal-mode)
-            (setq-default c-tab-always-indent "other")
-            (c-set-style "gnu")
-;;            (c-set-offset 'arglist-cont-nonempty '+)
-;;            (c-set-offset 'arglist-cont '+)
-            ))
-
-
-;; ruby
-;; (setq ri-ruby-script "~/.emacs.d/elisp/ri-emacs.rb")
-;; (autoload 'ri "~/.emacs.d/elisp/ri-ruby.el" nil t)
-
-
-
-
-;; python mode
-
-;; (add-hook 'python-mode-hook
-;;           (lambda ()
-;;             (when tags-file-name
-;;               (setq tags-file-name nil))
-;;             (unless (member "~/.emacs.d/tags/python" tags-table-list)
-;;               (push "~/.emacs.d/tags/python" tags-table-list))))
-
-;; dired
-
-;; (add-hook 'dired-mode-hook
-;;           '(lambda ()
-;;              (define-key dired-mode-map [return]
-;;                'dired-find-file-other-window)))
 
 (add-hook 'sql-mode-hook
           '(lambda ()
