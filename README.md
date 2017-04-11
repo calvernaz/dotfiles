@@ -13,3 +13,10 @@ To get this thing working just link the bash related files to your home
    ln -sf ~/dotfiles/bash/.bash_aliases ~/.bash_aliases
 
 ```
+
+# Extras
+
+Install bash completion
+
+	brew install bash-completion
+	brew install docker-completion
