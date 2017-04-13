@@ -6,6 +6,10 @@
   (package-refresh-contents)
 	)
 
+(unless (package-installed-p 'auto-complete)
+	(package-install 'auto-complete))
+(ac-config-default)
+
 ;; smartabs - spaces and tabs mix
 (unless (package-installed-p 'smart-tabs-mode)
 	(package-install 'smart-tabs-mode))
@@ -18,10 +22,24 @@
 ;; go
 (unless (package-installed-p 'go-mode)
   (package-install 'go-mode))
+(unless (package-installed-p 'go-autocomplete)
+	(package-install 'go-autocomplete))
+
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+(defun go-mode-setup ()
+  (setq compile-command "go build -v && go test -v && go vet && golint")
+  (define-key (current-local-map) "\C-c\C-c" 'compile)
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (local-set-key (kbd "M-.") 'godef-jump))
+
+(add-hook 'go-mode-hook 'go-mode-setup)
 
 ;; python
 (unless (package-installed-p 'python-mode)
   (package-install 'python-mode))
+
 
 ;; javascript
 (unless (package-installed-p 'js2-mode)
@@ -30,6 +48,10 @@
 ;; json-mode
 (unless (package-installed-p 'json-mode)
   (package-install 'json-mode))
+
+(setq x-select-enable-clipboard t)
+(define-key input-decode-map "\e\eOA" [(meta up)])
+(define-key input-decode-map "\e\eOB" [(meta down)])
 
 (blink-cursor-mode nil)
 (global-set-key "\M-h"     'delete-trailing-whitespace)
@@ -43,7 +65,11 @@
 (global-set-key "\C-hs"    'info-lookup-symbol)
 (global-set-key [mouse-1]  'mouse-select-window)
 (global-set-key "\C-ci"    'imenu)
-(global-set-key "\C-@"   'set-mark-command)
+(global-set-key "\C-@"     'set-mark-command)
+(global-set-key "\M-w"     'kill-ring-save)
+(global-set-key [M-up] 'move-text-up)
+(global-set-key [M-down] 'move-text-down)
+
 (global-unset-key [down-mouse-1])
 (setq-default dired-listing-switches "-la")
 (setq-default woman-topic-at-point nil)
@@ -96,6 +122,14 @@
 (setq-default load-path (cons "~/.emacs.d/elisp" load-path))
 (setq alchemist-project-compile-when-needed t) ;; default nil
 
+
+(define-key minibuffer-local-filename-completion-map (kbd "SPC")
+  'minibuffer-complete-word)
+
+(define-key minibuffer-local-must-match-filename-map (kbd "SPC")
+  'minibuffer-complete-word)
+
+
 (defadvice kill-region (before unix-werase activate compile)
   "When called interactively with no active region, delete a single word
     backwards instead."
@@ -127,8 +161,8 @@
  '(column-number-mode t)
  '(ecb-options-version "2.32")
  '(package-selected-packages
-   (quote
-    (dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
+	 (quote
+		(protobuf-mode dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
  '(select-enable-clipboard t)
  '(sh-basic-offset 8)
  '(sh-indentation 8)
@@ -147,3 +181,4 @@
  '(hl-line ((t (:background "#333333"))))
  '(mode-line ((t (:background "grey75" :foreground "#222222" :box (:line-width -1 :style released-button)))))
  '(variable-pitch ((t (:family unspecified)))))
+(put 'upcase-region 'disabled nil)

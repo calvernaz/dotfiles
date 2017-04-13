@@ -32,8 +32,8 @@ findPid () { lsof -t -c "$@" ; }
 spotlight () { mdfind "kMDItemDisplayName == $*wc"; }
 
 # Docker
-dockercleancontainers() { docker ps -a --no-trunc| grep 'Exit' | awk '{print \$1}' | xargs -L 1 -r docker rm; }
-dockercleanimages() { docker images -a --no-trunc | grep none | awk '{print \$3}' | xargs -L 1 -r docker rmi; }
+dockercleancontainers() { docker container prune; }
+dockercleanimages() { docker image prune --all; }
 dockerclean() { dockercleancontainers && dockercleanimages; }
 
 #   extract:  Extract most know archives with one command
