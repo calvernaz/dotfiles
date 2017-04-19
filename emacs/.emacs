@@ -162,7 +162,7 @@
  '(ecb-options-version "2.32")
  '(package-selected-packages
 	 (quote
-		(protobuf-mode dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
+		(flycheck-yamllint protobuf-mode dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
  '(select-enable-clipboard t)
  '(sh-basic-offset 8)
  '(sh-indentation 8)
