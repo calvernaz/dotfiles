@@ -15,6 +15,7 @@ ffs () { /usr/bin/find . -name "$*"'*' ; }  # ffs:      Find file whose name sta
 ffe () { /usr/bin/find . -name '*'"$*" ; }  # ffe:      Find file whose name ends with a given string
 my_ps() { ps "$@" -u "$USER" -o pid,%cpu,%mem,start,time,bsdtime,command ; }
 zipf () { zip -r "$1".zip "$1" ; }          # zipf:         To create a ZIP archive of a folder
+
 #   ---------------------------
 #   5.  PROCESS MANAGEMENT
 #   ---------------------------

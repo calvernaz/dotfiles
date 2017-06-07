@@ -49,6 +49,9 @@
 (unless (package-installed-p 'json-mode)
   (package-install 'json-mode))
 
+(add-to-list 'load-path "~/.emacs.d/emacs-sourcegraph-mode")
+(require 'sourcegraph-mode)
+
 (setq x-select-enable-clipboard t)
 (define-key input-decode-map "\e\eOA" [(meta up)])
 (define-key input-decode-map "\e\eOB" [(meta down)])
@@ -77,6 +80,7 @@
 (setq-default show-trailing-whitespace t)
 (setq-default default-indicate-empty-lines t)
 (setq-default tab-width 2)
+(setq-default js-indent-level 2)
 (setq indent-line-function 'insert-tab)
 (setq-default fill-column 78)
 (setq-default mouse-avoidance-nudge-dist 25)
@@ -160,6 +164,7 @@
  '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(ecb-options-version "2.32")
+ '(js-indent-level 2)
  '(package-selected-packages
 	 (quote
 		(flycheck-yamllint protobuf-mode dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
@@ -182,3 +187,4 @@
  '(mode-line ((t (:background "grey75" :foreground "#222222" :box (:line-width -1 :style released-button)))))
  '(variable-pitch ((t (:family unspecified)))))
 (put 'upcase-region 'disabled nil)
+(put 'scroll-left 'disabled nil)
