@@ -34,7 +34,7 @@ alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\
 # ---------
 # Emacs
 # ---------
-alias emacs="/usr/local/Cellar/emacs/25.1/bin/emacs -nw"
+alias emacs="/usr/local/Cellar/emacs/25.2/bin/emacs -nw"
 
 # ---------
 # Git
