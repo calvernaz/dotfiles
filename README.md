@@ -11,8 +11,18 @@ To get this thing working just link the bash related files to your home
    ln -sf ~/dotfiles/bash/.bash_profile ~/.bash_profile
    ln -sf ~/dotfiles/bash/.bash_functions ~/.bash_functions
    ln -sf ~/dotfiles/bash/.bash_aliases ~/.bash_aliases
-
 ```
+
+You'll need to configure `git`
+
+## git
+
+```sh
+	ln -sf ~/dotfiles/git/.gitconfig ~/.gitconfig
+	ln -sf ~/dotfiles/git/.git-prompt.sh ~/.git-prompt.sh
+```
+
+Customize your email and username inside the `.gitconfig` file
 
 # Extras
 

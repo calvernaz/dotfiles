@@ -49,9 +49,6 @@
 (unless (package-installed-p 'json-mode)
   (package-install 'json-mode))
 
-(add-to-list 'load-path "~/.emacs.d/emacs-sourcegraph-mode")
-(require 'sourcegraph-mode)
-
 (setq x-select-enable-clipboard t)
 (define-key input-decode-map "\e\eOA" [(meta up)])
 (define-key input-decode-map "\e\eOB" [(meta down)])
