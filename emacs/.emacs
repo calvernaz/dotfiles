@@ -4,16 +4,26 @@
   (package-initialize)
   (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
   (package-refresh-contents)
-	)
+  )
 
 (unless (package-installed-p 'auto-complete)
-	(package-install 'auto-complete))
+  (package-install 'auto-complete))
 (ac-config-default)
 
 ;; smartabs - spaces and tabs mix
 (unless (package-installed-p 'smart-tabs-mode)
-	(package-install 'smart-tabs-mode))
+  (package-install 'smart-tabs-mode))
 (smart-tabs-insinuate 'c 'javascript)
+
+;; smart-mode-line
+(unless (package-installed-p 'smart-mode-line)
+  (package-install 'smart-mode-line))
+(setq sml/no-confirm-load-theme t)
+
+(setq sml/theme 'dark)
+(require 'smart-mode-line)
+(sml/setup)
+
 
 ;; elixir
 (unless (package-installed-p 'elixir-mode)
@@ -23,7 +33,7 @@
 (unless (package-installed-p 'go-mode)
   (package-install 'go-mode))
 (unless (package-installed-p 'go-autocomplete)
-	(package-install 'go-autocomplete))
+  (package-install 'go-autocomplete))
 
 (add-hook 'before-save-hook 'gofmt-before-save)
 
@@ -160,11 +170,14 @@
  '(auto-image-file-mode nil)
  '(blink-cursor-mode nil)
  '(column-number-mode t)
+ '(custom-safe-themes
+	 (quote
+		("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(ecb-options-version "2.32")
- '(js-indent-level 2)
+ '(js-indent-level 2 t)
  '(package-selected-packages
 	 (quote
-		(flycheck-yamllint protobuf-mode dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
+		(solarized-theme smart-mode-line-powerline-theme flycheck-yamllint protobuf-mode dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
  '(select-enable-clipboard t)
  '(sh-basic-offset 8)
  '(sh-indentation 8)

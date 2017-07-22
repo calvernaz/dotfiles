@@ -41,3 +41,4 @@ export LSCOLORS=exfxcxdxbxegedabagacad
 ssh-add -A 2>/dev/null
 
 export HISTCONTROL=ignoreboth:erasedups
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
