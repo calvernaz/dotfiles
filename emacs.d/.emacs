@@ -3,8 +3,7 @@
   (require 'package)
   (package-initialize)
   (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-  (package-refresh-contents)
-  )
+  (package-refresh-contents))
 
 (unless (package-installed-p 'auto-complete)
   (package-install 'auto-complete))
@@ -184,8 +183,8 @@
 	 (quote
 		(solarized-theme smart-mode-line-powerline-theme flycheck-yamllint protobuf-mode dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
  '(select-enable-clipboard t)
- '(sh-basic-offset 8)
- '(sh-indentation 8)
+ '(sh-basic-offset 2)
+ '(sh-indentation 2)
  '(show-paren-mode t)
  '(user-mail-address "calvernaz@ptc.com"))
 (custom-set-faces
