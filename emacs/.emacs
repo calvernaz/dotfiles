@@ -9,21 +9,26 @@
 (unless (package-installed-p 'auto-complete)
   (package-install 'auto-complete))
 (ac-config-default)
+(use-package s)
+
+(unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+(require 'use-package)
+(setq use-package-always-ensure t)
 
 ;; smartabs - spaces and tabs mix
 (unless (package-installed-p 'smart-tabs-mode)
   (package-install 'smart-tabs-mode))
 (smart-tabs-insinuate 'c 'javascript)
 
-;; smart-mode-line
-(unless (package-installed-p 'smart-mode-line)
-  (package-install 'smart-mode-line))
-(setq sml/no-confirm-load-theme t)
+;; magit
+(use-package magit)
+(use-package magit-popup)
 
-(setq sml/theme 'dark)
-(require 'smart-mode-line)
-(sml/setup)
-
+;; powerline
+(use-package powerline)
+(powerline-default-theme)
 
 ;; elixir
 (unless (package-installed-p 'elixir-mode)
@@ -157,8 +162,8 @@
 
 (add-hook 'sh-mode-hook
 	  (lambda ()
-	    (setq tab-width 4
-		  sh-basic-offset 4
+	    (setq tab-width 2
+		  sh-basic-offset 2
 		  indent-tabs-mode t)))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
