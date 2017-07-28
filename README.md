@@ -30,3 +30,4 @@ Install bash completion
 
 	brew install bash-completion
 	brew install docker-completion
+	brew install bash-git-prompt

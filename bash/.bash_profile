@@ -1,6 +1,15 @@
 #!/usr/bin/env sh
 # ~/.bash_profile
 
+GIT_PROMPT_ONLY_IN_REPO=1 # Use the default prompt when not in a git repo.
+GIT_PROMPT_FETCH_REMOTE_STATUS=0 # Avoid fetching remote status
+GIT_PROMPT_SHOW_UPSTREAM=0 # Don't display upstream tracking branch
+GIT_SHOW_UNTRACKED_FILES=no # Don't count untracked files (no, normal, all)
+
+[[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
+[[ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]] && source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+
+
 [[ -s ~/.bashrc ]] && . ~/.bashrc
 [[ -s ~/.bash_aliases ]] && . ~/.bash_aliases
 [[ -s ~/.bash_functions ]] && . ~/.bash_functions
