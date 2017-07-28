@@ -10,7 +10,7 @@ This is how it gonna look in the end:
 
 ![bash](bash/bash.png?raw=true)
 
-To get this thing working just link the bash related files to your home or use [[stow | https://www.gnu.org/software/stow/manual/stow.html#Invoking-Stow ]] (but I can't be bothered)
+To get this thing working just link the bash related files to your home or use [stow](https://www.gnu.org/software/stow/manual/stow.html#Invoking-Stow) (but I can't be bothered)
 ```sh
    ln -sf ~/dotfiles/bash/.bash_profile ~/.bash_profile
    ln -sf ~/dotfiles/bash/.bash_functions ~/.bash_functions
