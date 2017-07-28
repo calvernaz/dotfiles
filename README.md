@@ -8,7 +8,7 @@ Bunch of dot files I've been collecting and updating for MacOSX.
 
 This is how it gonna look in the end:
 
-![bash](/bash/bash.jpg?raw=true)
+![bash](bash/bash.jpg?raw=true)
 
 To get this thing working just link the bash related files to your home
 ```sh
