@@ -30,7 +30,7 @@ alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file
 alias mvnci="mvn clean install -DskipTests=true"
 alias ll="ls -larth"
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
-
+alias grep='grep --color=always'
 # ---------
 # Emacs
 # ---------
