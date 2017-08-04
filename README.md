@@ -27,10 +27,9 @@ You'll need to configure `git`
 
 Customize your email and username inside the `.gitconfig` file
 
-# Extras
+# Requirements
 
-Install bash completion
-
-	brew install bash-completion
-	brew install docker-completion
-	brew install bash-git-prompt
+    brew install exa
+    brew install bash-completion
+    brew install docker-completion
+    brew install bash-git-prompt
