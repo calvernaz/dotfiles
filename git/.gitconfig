@@ -31,7 +31,8 @@
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
   pl = pull --rebase
   cl = clean --force
-
+  cr = remote prune origin
+  
 [filter "media"]
   required = true
   clean = git media clean %f
@@ -39,3 +40,6 @@
 
 [core]
   editor = emacs
+
+[format]
+  pretty = "%H %ci %ce %ae %d %s"

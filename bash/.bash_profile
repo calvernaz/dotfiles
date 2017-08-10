@@ -30,6 +30,10 @@ prompt
 #   ------------------------------------------------------------
 export PATH="$PATH"
 
+# Painless cd's
+# 
+export CDPATH='.:~/sandbox:~/sandbox/go-repository/work/src'
+
 #   Set Default Editor (change 'Nano' to the editor of your choice)
 #   ------------------------------------------------------------
 export EDITOR=/usr/bin/emacs
@@ -48,4 +52,5 @@ export LSCOLORS=exfxcxdxbxegedabagacad
 ssh-add -A 2>/dev/null
 
 export HISTCONTROL=ignoreboth:erasedups
+
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
