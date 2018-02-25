@@ -13,25 +13,25 @@ GIT_PROMPT_FETCH_REMOTE_STATUS=0 # Avoid fetching remote status
 GIT_PROMPT_SHOW_UPSTREAM=0 # Don't display upstream tracking branch
 GIT_SHOW_UNTRACKED_FILES=no # Don't count untracked files (no, normal, all)
 
-prompt() {
-	RED="\[\033[0;31m\]"
-	GREEN="\[\033[0;32m\]"
-	GREENBOLD="\[\033[1;32m\]"
-	BLUE="\[\033[0;34m\]"
-	PURPLE="\[\033[0;35m\]"
-	RESETCOLOR="\[\e[00m\]"
+#prompt() {
+#	RED="\[\033[0;31m\]"
+#	GREEN="\[\033[0;32m\]"
+#	GREENBOLD="\[\033[1;32m\]"
+#	BLUE="\[\033[0;34m\]"
+#	PURPLE="\[\033[0;35m\]"
+#	RESETCOLOR="\[\e[00m\]"
 #	PS1="\n$BLUE\u $PURPLE@ $GREEN\w $RESETCOLOR$GREENBOLD\n $BLUE[\#] → $RESETCOLOR"
-	export PS2=" | → $RESETCOLOR"
-}
+#	export PS2=" | → $RESETCOLOR"
+#}
 
-prompt
+#prompt
 
 #   Set Paths
 #   ------------------------------------------------------------
 export PATH="$PATH"
 
 # Painless cd's
-# 
+#
 export CDPATH='.:~/sandbox:~/sandbox/go-repository/work/src'
 
 #   Set Default Editor (change 'Nano' to the editor of your choice)

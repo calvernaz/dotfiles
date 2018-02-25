@@ -125,3 +125,5 @@ alias make5mb='mkfile 5m ./5MB.dat'         # make5mb:      Creates a file of 5m
 alias make10mb='mkfile 10m ./10MB.dat'      # make10mb:     Creates a file of 10mb size (all zeros)
 
 alias deflate="perl -MCompress::Zlib -e 'undef $/; print uncompress(<>)'"
+alias antlr4='java -Xmx500M -cp "$ANTLR/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
+alias grun='java org.antlr.v4.gui.TestRig'
