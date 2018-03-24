@@ -63,6 +63,10 @@
 (unless (package-installed-p 'json-mode)
   (package-install 'json-mode))
 
+;; move-text
+(unless (package-installed-p 'move-text)
+	(package-install 'move-text))
+
 (setq x-select-enable-clipboard t)
 (define-key input-decode-map "\e\eOA" [(meta up)])
 (define-key input-decode-map "\e\eOB" [(meta down)])
