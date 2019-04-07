@@ -33,3 +33,8 @@ Customize your email and username inside the `.gitconfig` file
     brew install bash-completion
     brew install docker-completion
     brew install bash-git-prompt
+
+## Emacs
+
+To start emacs as daemon with systemd follow the instructions from ![here](https://www.emacswiki.org/emacs/EmacsAsDaemon).
+In my case `emacs.service` file was in the directory `/usr/share/emacs/26.1/etc/`.
