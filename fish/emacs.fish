@@ -1,3 +1,3 @@
 function emacs
-    command emacs -nw $argv
+    command emacsclient -nw $argv
 end
