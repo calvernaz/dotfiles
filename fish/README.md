@@ -1,4 +1,4 @@
 
 	cp fish_variables ~/.config/fish/fish_variables
 
-	cp *.fish ~/config/fish/functions/
+	cp *.fish ~/.config/fish/functions/
