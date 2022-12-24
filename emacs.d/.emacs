@@ -190,7 +190,7 @@
  '(sh-basic-offset 2)
  '(sh-indentation 2)
  '(show-paren-mode t)
- '(user-mail-address "calvernaz@ptc.com"))
+ '(user-mail-address "calvernaz@weirdloop.org"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
