@@ -1,22 +1,21 @@
 ;; .emacs
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-  (package-refresh-contents))
+(require 'package)
+(package-initialize)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages") t)
 
+;; installs "auto-Complete"
 (unless (package-installed-p 'auto-complete)
   (package-install 'auto-complete))
 (ac-config-default)
-(use-package s)
 
+;; installs "use-package"
 (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; smartabs - spaces and tabs mix
+;; installs "smartabs" - spaces and tabs mix
 (unless (package-installed-p 'smart-tabs-mode)
   (package-install 'smart-tabs-mode))
 (smart-tabs-insinuate 'c 'javascript)
@@ -25,20 +24,13 @@
 (use-package magit)
 (use-package magit-popup)
 
-;; powerline
-(use-package powerline)
-(powerline-default-theme)
-
-;; elixir
+;; installs "elixir-mode"
 (unless (package-installed-p 'elixir-mode)
   (package-install 'elixir-mode))
 
-;; go
+;; installs "go-mode"
 (unless (package-installed-p 'go-mode)
   (package-install 'go-mode))
-(unless (package-installed-p 'go-autocomplete)
-  (package-install 'go-autocomplete))
-
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 (defun go-mode-setup ()
@@ -50,24 +42,27 @@
 
 (add-hook 'go-mode-hook 'go-mode-setup)
 
-;; python
+;; installs "python-mode"
 (unless (package-installed-p 'python-mode)
   (package-install 'python-mode))
 
 
-;; javascript
+;; installs "javascript-mode"
 (unless (package-installed-p 'js2-mode)
   (package-install 'js2-mode))
 
-;; json-mode
+;; installs "json-mode"
 (unless (package-installed-p 'json-mode)
   (package-install 'json-mode))
 
-;; move-text
+;; installs "move-text" - move-text is a simple Emacs package that lets you move a line or region around using M + ↑ and M + ↓
 (unless (package-installed-p 'move-text)
 	(package-install 'move-text))
 
 (setq x-select-enable-clipboard t)
+;;
+(setq inhibit-startup-screen t)
+
 (define-key input-decode-map "\e\eOA" [(meta up)])
 (define-key input-decode-map "\e\eOB" [(meta down)])
 
@@ -117,10 +112,10 @@
 (setq-default gdb-many-windows t)
 (setq-default mouse-autoselect-window t)
 (setq-default hs-isearch-open t)
+(setq-default windmove-wrap-around t)
 
 (windmove-default-keybindings)
 (global-set-key [select]  'windmove-up)
-(setq-default windmove-wrap-around t)
 
 (transient-mark-mode 1)
 (delete-selection-mode 1)
@@ -140,14 +135,6 @@
 
 (setq-default load-path (cons "~/.emacs.d/elisp" load-path))
 (setq alchemist-project-compile-when-needed t) ;; default nil
-
-
-(define-key minibuffer-local-filename-completion-map (kbd "SPC")
-  'minibuffer-complete-word)
-
-(define-key minibuffer-local-must-match-filename-map (kbd "SPC")
-  'minibuffer-complete-word)
-
 
 (defadvice kill-region (before unix-werase activate compile)
   "When called interactively with no active region, delete a single word
@@ -185,7 +172,7 @@
  '(js-indent-level 2 t)
  '(package-selected-packages
 	 (quote
-		(solarized-theme smart-mode-line-powerline-theme flycheck-yamllint protobuf-mode dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
+		(solarized-theme flycheck-yamllint protobuf-mode dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
  '(select-enable-clipboard t)
  '(sh-basic-offset 2)
  '(sh-indentation 2)
