@@ -1,8 +1,10 @@
 ;; .emacs
-(require 'package)
-(package-initialize)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages") t)
-
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t))
+;;    (package-refresh-contents))
 ;; installs "auto-Complete"
 (unless (package-installed-p 'auto-complete)
   (package-install 'auto-complete))
@@ -16,9 +18,9 @@
 (setq use-package-always-ensure t)
 
 ;; installs "smartabs" - spaces and tabs mix
-(unless (package-installed-p 'smart-tabs-mode)
-  (package-install 'smart-tabs-mode))
-(smart-tabs-insinuate 'c 'javascript)
+;;(unless (package-installed-p 'smart-tabs-mode)
+;;  (package-install 'smart-tabs-mode))
+;;(smart-tabs-insinuate 'c 'javascript)
 
 ;; magit
 (use-package magit)
@@ -128,7 +130,6 @@
 (require 'font-lock)
 (global-font-lock-mode 1)
 (setq font-lock-mode-maximum-decoration t)
-(iswitchb-mode t)
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -166,24 +167,23 @@
  '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(custom-safe-themes
-	 (quote
-		("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+	 '("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(ecb-options-version "2.32")
  '(js-indent-level 2 t)
  '(package-selected-packages
-	 (quote
-		(solarized-theme flycheck-yamllint protobuf-mode dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode)))
+	 '(zenburn-theme solarized-theme flycheck-yamllint protobuf-mode dockerfile-mode docker alchemist exec-path-from-shell flycheck markdown-mode yaml-mode smart-tabs-mode groovy-mode epl company batch-mode))
  '(select-enable-clipboard t)
  '(sh-basic-offset 2)
  '(sh-indentation 2)
  '(show-paren-mode t)
  '(user-mail-address "calvernaz@weirdloop.org"))
+(load-theme 'zenburn t)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "#000000" :foreground "#aaaaaa" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :family "terminus"))))
+ ;; '(default ((t (:stipple nil :background "#000000" :foreground "#aaaaaa" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :family "terminus"))))
  '(cursor ((t (:background "gold"))))
  '(fixed-pitch ((t (:family unspecified))))
  '(font-latex-verbatim-face ((t (:inherit font-latex-math-face :family unspecified))))

@@ -4,6 +4,10 @@ Bunch of dot files I've been collecting and updating for MacOSX.
 
 # Install
 
+## fish
+
+   brew install fish
+
 ## sh
 
 This is how it gonna look in the end:
