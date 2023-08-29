@@ -42,3 +42,8 @@ Customize your email and username inside the `.gitconfig` file
 
 To start emacs as daemon with systemd follow the instructions from ![here](https://www.emacswiki.org/emacs/EmacsAsDaemon).
 In my case `emacs.service` file was in the directory `/usr/share/emacs/26.1/etc/`.
+
+## Claude
+
+	Copy claude to ~/.claude
+	https://claude.ai/public/artifacts/e2725e41-cca5-48e5-9c15-6eab92012e75
